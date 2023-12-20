@@ -1,4 +1,3 @@
-use i8;
 use rand::Rng;
 use std::io::{self, Write};
 
@@ -32,6 +31,7 @@ fn least_common_multiple(a: u64, b: u64) -> u64 {
     let mut i = 1;
     while i <= a * b {
         if i % a == 0 && i % b == 0 {
+            // Check if i is a multiple of both a and b
             lcm = i;
             break;
         }
@@ -42,6 +42,9 @@ fn least_common_multiple(a: u64, b: u64) -> u64 {
 
 fn modular_multiplicative_inverse(a: u64, m: u64) -> Option<u64> {
     for i in 1..m {
+        // The condition '(a % m) * (i % m) % m == 1' checks if the product of 'a' and 'i',
+        // under modulo 'm', equals 1. If this condition is true, 'i' is the modular
+        // multiplicative inverse of 'a' modulo 'm'.
         if (a % m) * (i % m) % m == 1 {
             return Some(i);
         }
@@ -51,16 +54,18 @@ fn modular_multiplicative_inverse(a: u64, m: u64) -> Option<u64> {
 
 fn modular_exponentiation(mut base: u64, mut exponent: u64, modulus: u64) -> u64 {
     if modulus == 1 {
+        // If the modulus is 1, the result is always 0
         return 0;
     }
     let mut result = 1;
-    base = base % modulus;
+    base = base % modulus; // Reduce the base to a value between 0 and modulus - 1
     while exponent > 0 {
         if exponent % 2 == 1 {
-            result = (result * base) % modulus;
+            // Is the exponent odd?
+            result = (result * base) % modulus; // Multiply the result with the base
         }
-        exponent = exponent >> 1;
-        base = (base * base) % modulus;
+        exponent = exponent >> 1; // Divide the exponent by 2
+        base = (base * base) % modulus; // Square the base
     }
     result
 }
@@ -74,8 +79,9 @@ fn generate_keypair() -> KeyPair {
     let p = get_random_prime();
     let q = get_random_prime();
     let n = p * q;
-    let totient = least_common_multiple(p - 1, q - 1);
-    let e = 2_u64.pow(16) + 1;
+    let totient = least_common_multiple(p - 1, q - 1); // Calculate the totient as the mleast
+                                                       // common multiple of p-1 and q-1
+    let e = 2_u64.pow(16) + 1; // 65537 is a commonly used value for e
     let d = modular_multiplicative_inverse(e, totient).unwrap();
     KeyPair {
         public_key: (e, n),
