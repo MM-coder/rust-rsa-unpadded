@@ -12,6 +12,7 @@ First, clone the repository to your local machine using Git. Open a terminal and
 
 ```bash
 git clone https://github.com/MM-coder/rust-rsa-unpadded
+```
 
 After cloning, navigate into the project's directory:
 
