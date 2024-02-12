@@ -2,6 +2,17 @@
 
 > This repository contains a simple RSA implementation in Rust indended to demonstrate how RSA works. 
 
+# Features
+
+- **Key Generation**: Generates a public and private key pair using randomly selected prime numbers.
+- **Encryption**: Encrypts a plaintext message using the public key.
+- **Decryption**: Decrypts the ciphertext using the private key to retrieve the original plaintext message.
+
+# Limitations
+
+- The program is a demonstration and should not be used for actual secure communications.
+- Currently, it handles plaintext that can be directly converted to numbers and back without loss. Special characters or very long messages may not be supported as expected.
+
 # Installation and Running
 
 This guide assumes you have Rust and Cargo installed on your system. If you do not have Rust installed, please visit [The Rust Programming Language website](https://www.rust-lang.org/tools/install) to install Rust and Cargo before proceeding.
@@ -47,6 +58,23 @@ cargo build --release
 
 This will compile the program with optimizations. The compiled binary will be located in target/release/ instead of target/debug/.
 Troubleshooting
+
+# Usage
+
+After running the program, you will be prompted to enter a plaintext message that you wish to encrypt. Type your message and press enter. The program will then display the encrypted version of your message as a series of numbers (ciphertext) and the decrypted message, which should match the original plaintext.
+Example
+
+```plaintext
+
+Enter plaintext to encrypt: Hello, world!
+Encrypted: [123456, 234567, ...] // Example output
+Decrypted: Hello, world!
+
+```
+
+This process demonstrates the encryption and decryption capabilities of the program using a simple RSA-like algorithm. The actual numbers in the encrypted output will vary each time you run the program due to the random generation of keys.
+
+
 
 # Disclaimer
 
